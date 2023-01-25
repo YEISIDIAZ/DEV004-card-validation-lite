@@ -7,41 +7,65 @@
 </head>
 
 <body>
-  <input id="cardnumber" type="number" placeholder="0000 0000 0000 0000" maxlenght="16" minlenght="13"></input>
-    <button onclick="validate()">Validar</button>
+  <input id="cardnumber" type="number" placeholder="0000 0000 0000 0000" ></input>
+    <button onclick="isValidCard()">Validar</button>
   <div id="result"></div>
 
 
-  <script lang="javascript">
+<script lang="javascript">
 
-    function validate() {
-      console.log("yeisi")
-      var a = (document.getElementById("cardnumber").value)
-      //console.log(a)
-      var b = a.split('')
-      console.log (b)
-      var c = b.reverse()
-      console.log(c)
+function isValidCard() {
+ 
+var tarjeta = document.getElementById('cardnumber').value;
+if (tarjeta === "" ){
+      alert('Ingrese un número de tarjeta válido');
+      return exit();
+     }
 
-      const valid = isValid(document.getElementById("cardnumber").value)
-      if (valid) {
-        // Show success in div#result
-      }
-      else {
-          
+   var sum     = 0,
+   alt     = false,
+   i       = tarjeta.length-1,
+   num;
+
+    if (tarjeta.length < 13 || tarjeta.length > 16){
+        alert('El número de tarjeta tiene que ser mayor a 13 y menor a 17 dígitos.');
+        return exit();
+      
+    }
+
+   while (i >= 0){
+
+       num = parseInt(tarjeta.charAt(i), 10);
+       if (alt) {
+          num *= 2;
+            if (num > 9){
+              num = (num % 10) + 1;
+            }
+       }
         
-
-
-
-        // Show error message in div#result
+      alt = !alt;
+       
+        sum += num;
+      
+        i--;
+    }
+   
+    if (sum % 10 === 0 && sum!==0){
+      return alert('Tarjeta válida');
+   }
+     else{
+      return alert('Tarjeta inválida');
       }
-    }
 
-    function isValid(creditCardNumber){
-      // is creditCardNumber valid?
-      return false
-    }
+
+}
+
+exit();
+
+    
   </script>
+
+
 </body>
 
 </html>
