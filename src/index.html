@@ -7,16 +7,32 @@
 </head>
 
 <body>
-  <input id="cardnumber"></input>
-  <button onclick="validate()">Validar</button>
+  <input id="cardnumber" type="number" placeholder="0000 0000 0000 0000" maxlenght="16" minlenght="13"></input>
+    <button onclick="validate()">Validar</button>
   <div id="result"></div>
+
+
   <script lang="javascript">
+
     function validate() {
+      console.log("yeisi")
+      var a = (document.getElementById("cardnumber").value)
+      //console.log(a)
+      var b = a.split('')
+      console.log (b)
+      var c = b.reverse()
+      console.log(c)
+
       const valid = isValid(document.getElementById("cardnumber").value)
       if (valid) {
         // Show success in div#result
       }
       else {
+          
+        
+
+
+
         // Show error message in div#result
       }
     }
