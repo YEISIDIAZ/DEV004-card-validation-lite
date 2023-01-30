@@ -7,62 +7,82 @@
 </head>
 
 <body>
-  <input id="cardnumber" type="number" placeholder="0000 0000 0000 0000" ></input>
-    <button onclick="isValidCard()">Validar</button>
-  <div id="result"></div>
 
+  <input type="number" id="cardNumber" placeholder="0000 0000 0000 0000">
+  <button  onclick="validate()">Validar</button> <!--creamos un boton--->
 
-<script lang="javascript">
-
-function isValidCard() {
- 
-var tarjeta = document.getElementById('cardnumber').value;
-if (tarjeta === "" ){
-      alert('Ingrese un número de tarjeta válido');
-      return exit();
-     }
-
-   var sum     = 0,
-   alt     = false,
-   i       = tarjeta.length-1,
-   num;
-
-    if (tarjeta.length < 13 || tarjeta.length > 16){
-        alert('El número de tarjeta tiene que ser mayor a 13 y menor a 17 dígitos.');
-        return exit();
-      
-    }
-
-   while (i >= 0){
-
-       num = parseInt(tarjeta.charAt(i), 10);
-       if (alt) {
-          num *= 2;
-            if (num > 9){
-              num = (num % 10) + 1;
-            }
-       }
-        
-      alt = !alt;
-       
-        sum += num;
-      
-        i--;
-    }
    
-    if (sum % 10 === 0 && sum!==0){
-      return alert('Tarjeta válida');
-   }
-     else{
-      return alert('Tarjeta inválida');
-      }
 
 
-}
+   <script lang="javascript">
 
-exit();
 
+    function validate() {
+
+      
+      const numeroTC = document.getElementById("cardNumber").value;
+      console.log("variable numeroTC ---> " + numeroTC);
+      let convert = numeroTC.split('').reverse(); 
+      //El método split() divide un objeto de tipo String en un array (vector) de cadenas
+      //El método reverse() invierte el orden de los elementos de un array
+      // El primer elemento pasa a ser el último y el último pasa a ser el primero.
+      console.log("variable convert = " + convert)
+      let sum     = 0;
+      let n       = 0;
+
+      for (let i = 0; i < convert.length; i++) {
+           
+      if (i % 2 === 1) {
+             n = Number(convert[i] * 2); //14
+        if (n >= 10) {
+            n = (n + 10) + 1 
+        }
+    } else {
+        n = Number(convert[i])
+    }
+
+    sum = sum + n
+ }
+      residuo = sum % 10;
+        console.log("variable sum === = " + sum)
+        console.log("variable residuo === = " + residuo)
+
+        if (residuo === 0){ 
+                validation=true}
+        else{validation=false}
     
+      console.log ("validation es ***** " + validation);
+
+
+
+
+   
+        if(numeroTC.length < 13 || numeroTC.length > 16){
+            alert("Ingresa un número de tarjeta válido.");
+            }else if(numeroTC === 0){
+                alert("Ingresa un número de tarjeta válido.");
+
+                    }else if(validation===true){
+                       
+                            alert("Tarjeta  válida.");
+                           
+                         
+                            
+                          
+                          
+                    }else {
+                             alert("Tarjeta inválida.")
+                         }
+
+
+
+    }
+
+
+    //5352621771856289 
+
+
+
   </script>
 
 
